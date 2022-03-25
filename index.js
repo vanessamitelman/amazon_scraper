@@ -4,14 +4,17 @@ const request = require('request-promise');
 const app = express();
 const PORT = process.env.REACT_APP_PORT|| 5001;
 
-
-const generateScraperUrl = (apiKey) =>
-  `http://api.scraperapi.com?api_key=${apiKey}&autoparse=true`;
-app.use(express.json());
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
 
 app.get('/', (req, res) => {
   res.send('Welcome to Amazon Scraper API.');
 });
+
+const generateScraperUrl = (apiKey) =>
+  `http://api.scraperapi.com?api_key=${apiKey}&autoparse=true`;
+app.use(express.json());
 
 //GET PRODUCT DETAILS
 app.get('/products/:productId', async (req, res) => {
@@ -69,6 +72,4 @@ app.get('/search/:searchQuery', async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+
